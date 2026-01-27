@@ -398,16 +398,28 @@
             align-items: center;
             font-weight: 600;
             color: var(--text-dark);
+            transition: background 0.2s ease;
         }
         .accordion-header:hover { background: #fdfdfd; }
         .accordion-body {
-            max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 0;
             padding: 0 20px;
             color: var(--text-light);
         }
         .accordion-body p { padding-bottom: 20px; }
+        .accordion-item.active .accordion-body {
+            max-height: 500px;
+            padding: 20px;
+        }
+        .accordion-item.active .accordion-header i {
+            transform: rotate(180deg);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .accordion-header i {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
         /* --- CONVERSION SPLIT FOOTER --- */
         .conversion-split {
@@ -765,20 +777,20 @@
         // Initialize EmailJS
         emailjs.init('YOUR_PUBLIC_KEY_HERE'); // Get your public key from https://dashboard.emailjs.com/
 
-        // Accordion Functionality
+        // Accordion Functionality - Class-based approach
         document.querySelectorAll('.accordion-header').forEach(header => {
             header.addEventListener('click', () => {
-                const body = header.nextElementSibling;
-                const icon = header.querySelector('i');
+                const accordionItem = header.parentElement;
                 
-                // Toggle active class logic
-                if (body.style.maxHeight) {
-                    body.style.maxHeight = null;
-                    icon.style.transform = "rotate(0deg)";
-                } else {
-                    body.style.maxHeight = body.scrollHeight + "px";
-                    icon.style.transform = "rotate(180deg)";
-                }
+                // Close all other accordion items
+                document.querySelectorAll('.accordion-item').forEach(item => {
+                    if (item !== accordionItem) {
+                        item.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current accordion item
+                accordionItem.classList.toggle('active');
             });
         });
 
