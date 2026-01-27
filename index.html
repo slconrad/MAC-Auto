@@ -390,35 +390,51 @@
             border-radius: 8px;
             overflow: hidden;
         }
-        .accordion-header {
-            padding: 20px;
+        details {
             cursor: pointer;
+        }
+        summary {
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-weight: 600;
             color: var(--text-dark);
             transition: background 0.2s ease;
+            list-style: none;
         }
-        .accordion-header:hover { background: #fdfdfd; }
-        .accordion-body {
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            max-height: 0;
-            padding: 0 20px;
-            color: var(--text-light);
+        summary:hover {
+            background: #fdfdfd;
         }
-        .accordion-body p { padding-bottom: 20px; }
-        .accordion-item.active .accordion-body {
-            max-height: 500px;
-            padding: 20px;
+        summary::-webkit-details-marker {
+            display: none;
         }
-        .accordion-item.active .accordion-header i {
+        details[open] summary {
+            background: #fdfdfd;
+        }
+        details[open] summary i {
             transform: rotate(180deg);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .accordion-header i {
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        summary i {
+            transition: transform 0.3s ease;
+        }
+        .accordion-body {
+            padding: 0 20px 20px 20px;
+            color: var(--text-light);
+            animation: slideDown 0.3s ease-out;
+        }
+        .accordion-body p {
+            margin: 0;
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* --- CONVERSION SPLIT FOOTER --- */
@@ -656,42 +672,42 @@
             </div>
             
             <div class="accordion">
-                <div class="accordion-item">
-                    <div class="accordion-header">
+                <details class="accordion-item">
+                    <summary class="accordion-header">
                         Do you work with insurance companies?
                         <i class="fas fa-chevron-down"></i>
-                    </div>
+                    </summary>
                     <div class="accordion-body">
                         <p>Yes, we work with all major insurance providers to streamline your claim process.</p>
                     </div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-header">
+                </details>
+                <details class="accordion-item">
+                    <summary class="accordion-header">
                         Do you repair hail damage?
                         <i class="fas fa-chevron-down"></i>
-                    </div>
+                    </summary>
                     <div class="accordion-body">
                         <p>Absolutely. We specialize in hail damage repair using both PDR (Paintless Dent Repair) and traditional methods.</p>
                     </div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-header">
+                </details>
+                <details class="accordion-item">
+                    <summary class="accordion-header">
                         How long will my repair take?
                         <i class="fas fa-chevron-down"></i>
-                    </div>
+                    </summary>
                     <div class="accordion-body">
                         <p>Repair times vary by damage severity, but minor repairs often take 1-3 days.</p>
                     </div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-header">
+                </details>
+                <details class="accordion-item">
+                    <summary class="accordion-header">
                         Can you match my car's original paint color?
                         <i class="fas fa-chevron-down"></i>
-                    </div>
+                    </summary>
                     <div class="accordion-body">
                         <p>Yes, we use computerized color matching technology to ensure a seamless factory finish.</p>
                     </div>
-                </div>
+                </details>
             </div>
         </div>
     </section>
@@ -776,23 +792,6 @@
     <script>
         // Initialize EmailJS
         emailjs.init('YOUR_PUBLIC_KEY_HERE'); // Get your public key from https://dashboard.emailjs.com/
-
-        // Accordion Functionality - Class-based approach
-        document.querySelectorAll('.accordion-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const accordionItem = header.parentElement;
-                
-                // Close all other accordion items
-                document.querySelectorAll('.accordion-item').forEach(item => {
-                    if (item !== accordionItem) {
-                        item.classList.remove('active');
-                    }
-                });
-                
-                // Toggle current accordion item
-                accordionItem.classList.toggle('active');
-            });
-        });
 
         // Dealership Slider Functionality - CSS ANIMATION BASED
         const indicatorsContainer = document.getElementById('indicators');
