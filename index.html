@@ -769,7 +769,20 @@
         document.querySelectorAll('.accordion-header').forEach(header => {
             header.addEventListener('click', () => {
                 const body = header.nextElementSibling;
-                const icon = header.querySeleCSS ANIMATION BASED
+                const icon = header.querySelector('i');
+                
+                // Toggle active class logic
+                if (body.style.maxHeight) {
+                    body.style.maxHeight = null;
+                    icon.style.transform = "rotate(0deg)";
+                } else {
+                    body.style.maxHeight = body.scrollHeight + "px";
+                    icon.style.transform = "rotate(180deg)";
+                }
+            });
+        });
+
+        // Dealership Slider Functionality - CSS ANIMATION BASED
         const indicatorsContainer = document.getElementById('indicators');
         const cards = document.querySelectorAll('.dealership-card');
         const totalCards = cards.length;
