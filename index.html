@@ -769,9 +769,9 @@
             });
         });
 
-        // Dealership Slider Functionality
+        // Dealership Slider Functionality - FIXED VERSION
         let currentIndex = 0;
-        let autoSlideInterval;
+        let autoSlideInterval = null;
         
         const sliderContainer = document.getElementById('sliderContainer');
         const cards = document.querySelectorAll('.dealership-card');
@@ -782,13 +782,18 @@
         const cardWidth = 170; // 150px card + 20px gap
         const totalCards = cards.length;
         
+        console.log('Slider initialized with', totalCards, 'cards');
+        
         // Create indicators
         function createIndicators() {
             indicatorsContainer.innerHTML = '';
             for (let i = 0; i < totalCards; i++) {
                 const indicator = document.createElement('div');
                 indicator.className = 'indicator' + (i === 0 ? ' active' : '');
-                indicator.addEventListener('click', () => goToSlide(i));
+                indicator.addEventListener('click', () => {
+                    goToSlide(i);
+                    resetAutoSlide();
+                });
                 indicatorsContainer.appendChild(indicator);
             }
         }
@@ -796,6 +801,7 @@
         function updateSlider() {
             // Move the slider container
             const offset = -currentIndex * cardWidth;
+            console.log('Moving to index', currentIndex, 'offset:', offset + 'px');
             sliderContainer.style.transform = `translateX(${offset}px)`;
             
             // Update active card
@@ -812,22 +818,44 @@
         
         function nextSlide() {
             currentIndex = (currentIndex + 1) % totalCards;
+            console.log('Next slide: currentIndex =', currentIndex);
             updateSlider();
         }
         
         function prevSlide() {
             currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+            console.log('Prev slide: currentIndex =', currentIndex);
             updateSlider();
         }
         
         function goToSlide(index) {
             currentIndex = index % totalCards;
+            console.log('Go to slide:', currentIndex);
             updateSlider();
         }
         
+        function resetAutoSlide() {
+            // Clear existing interval
+            if (autoSlideInterval) {
+                clearInterval(autoSlideInterval);
+            }
+            // Restart auto-slide after 5 seconds
+            autoSlideInterval = setInterval(nextSlide, 5000);
+        }
+        
         // Event listeners
-        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
-        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoSlide();
+            });
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoSlide();
+            });
+        }
         
         // Initialize indicators and slider
         createIndicators();
@@ -835,6 +863,7 @@
         
         // Auto-rotate slider every 5 seconds
         autoSlideInterval = setInterval(nextSlide, 5000);
+        console.log('Auto-slide started');
         
         // Form submission handler
         function handleFormSubmit(event) {
