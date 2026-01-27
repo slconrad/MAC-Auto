@@ -185,7 +185,7 @@
         /* --- DEALERSHIP SLIDER --- */
         .dealership-slider {
             position: relative;
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
             overflow: hidden;
         }
@@ -774,35 +774,42 @@
         });
 
         // Dealership Slider Functionality
+        let currentIndex = 0;
+        let autoSlideInterval;
+        
         const sliderContainer = document.getElementById('sliderContainer');
         const cards = document.querySelectorAll('.dealership-card');
         const indicatorsContainer = document.getElementById('indicators');
         const prevBtn = document.querySelector('.prev-btn');
         const nextBtn = document.querySelector('.next-btn');
         
-        let currentIndex = 0;
-        const cardWidth = 150 + 20; // card width + gap
-        const visibleCards = 3;
+        const cardWidth = 170; // 150px card + 20px gap
         const totalCards = cards.length;
         
         // Create indicators
-        for (let i = 0; i < Math.ceil(totalCards / 1); i++) {
-            const indicator = document.createElement('div');
-            indicator.className = 'indicator' + (i === 0 ? ' active' : '');
-            indicator.addEventListener('click', () => goToSlide(i));
-            indicatorsContainer.appendChild(indicator);
+        function createIndicators() {
+            indicatorsContainer.innerHTML = '';
+            for (let i = 0; i < totalCards; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = 'indicator' + (i === 0 ? ' active' : '');
+                indicator.addEventListener('click', () => goToSlide(i));
+                indicatorsContainer.appendChild(indicator);
+            }
         }
         
         function updateSlider() {
+            // Move the slider container
             const offset = -currentIndex * cardWidth;
             sliderContainer.style.transform = `translateX(${offset}px)`;
             
-            // Update active card and indicators
+            // Update active card
             cards.forEach((card, index) => {
                 card.classList.toggle('active', index === currentIndex);
             });
             
-            document.querySelectorAll('.indicator').forEach((ind, index) => {
+            // Update active indicator
+            const indicators = document.querySelectorAll('.indicator');
+            indicators.forEach((ind, index) => {
                 ind.classList.toggle('active', index === currentIndex);
             });
         }
@@ -818,15 +825,20 @@
         }
         
         function goToSlide(index) {
-            currentIndex = index;
+            currentIndex = index % totalCards;
             updateSlider();
         }
         
-        prevBtn.addEventListener('click', prevSlide);
-        nextBtn.addEventListener('click', nextSlide);
+        // Event listeners
+        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+        
+        // Initialize indicators and slider
+        createIndicators();
+        updateSlider();
         
         // Auto-rotate slider every 5 seconds
-        setInterval(nextSlide, 5000);
+        autoSlideInterval = setInterval(nextSlide, 5000);
         
         // Form submission handler
         function handleFormSubmit(event) {
