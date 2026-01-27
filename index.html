@@ -368,10 +368,10 @@
         .author-info span { font-size: 0.8rem; color: #9CA3AF; }
 
         /* --- FAQ ACCORDION --- */
-        .faq { background: #F9FAFB; }
+        .faq { background: #e7e7e7; }
         .accordion-item {
             background: white;
-            border: 1px solid #E5E7EB;
+            border: 1px solid #d7d7d8;
             margin-bottom: 10px;
             border-radius: 8px;
             overflow: hidden;
@@ -696,8 +696,8 @@
             </div>
         </div>
 
-        <!-- <div class="conversion-split"> -->
-            <!-- <div class="form-side" id="contact">
+        <div class="conversion-split">
+            <div class="form-side" id="contact">
                 <h3 style="margin-bottom: 20px; font-size: 1.5rem;"><i class="fas fa-paper-plane" style="color: var(--primary-red);"></i> Get Your Free Estimate</h3>
                 <p style="margin-bottom: 30px; font-size: 0.9rem; color: #666;">Fill out the form and we'll contact you within 24 hours with your personalized estimate.</p>
                 <form id="estimateForm" onsubmit="handleFormSubmit(event)">
@@ -720,14 +720,14 @@
                     <button type="submit" class="btn btn-red" style="width: 100%;">Get My Free Estimate <i class="fas fa-arrow-right"></i></button>
                     <p style="font-size: 0.7rem; color: #999; margin-top: 15px;">By submitting this form, you agree to our Privacy Policy and Terms of Service.</p>
                 </form>
-            </div> -->
+            </div>
 
             <div class="red-side">
                 <h2>Call Us Now</h2>
                 <h3>(903) 253-0511</h3>
-                <p style="margin-bottom: 20px;">Speak directly with our auto service experts.<br>Available Monday - Saturday: 7:00 AM - 7:00 PM<br>Emergency services available</p>
+                <p style="margin-bottom: 30px;">Speak directly with our auto service experts.<br>Available Monday - Saturday: 7:00 AM - 7:00 PM<br>Emergency services available</p>
                 
-                <h4 style="margin-bottom: 10px; color: white;">Why Choose Mac Auto?</h4>
+                <h4 style="margin-bottom: 20px; color: white;">Why Choose Mac Auto?</h4>
                 <ul class="features-list">
                     <li><i class="fas fa-check"></i> <div><strong>Professional Service</strong><br><span style="font-size: 0.85rem; opacity: 0.8;">Expert auto body and paint specialists</span></div></li>
                     <li><i class="fas fa-check"></i> <div><strong>Quality Materials</strong><br><span style="font-size: 0.85rem; opacity: 0.8;">Premium automotive paints and parts</span></div></li>
@@ -735,7 +735,7 @@
                     <li><i class="fas fa-check"></i> <div><strong>Free Estimates</strong><br><span style="font-size: 0.85rem; opacity: 0.8;">No obligation estimates within 24 hours</span></div></li>
                 </ul>
             </div>
-        <!-- </div> -->
+        </div>
     </section>
 
     <div class="seo-footer">
@@ -828,7 +828,10 @@
         setInterval(nextSlide, 5000);
         
         // Form submission handler
-        function hsubmitBtn = form.querySelector('button[type="submit"]');
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn.innerHTML;
             
             // Get form values
@@ -837,7 +840,7 @@
                 from_phone: form.querySelector('input[name="from_phone"]').value,
                 from_email: form.querySelector('input[name="from_email"]').value,
                 message: form.querySelector('textarea[name="message"]').value,
-                reply_to: form.querySelector('input[name="from_email"]').value
+                to_email: 'g2gauto@yahoo.com'
             };
             
             // Validate all fields
@@ -850,29 +853,32 @@
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             
-            // Send email via EmailJS
+            // Send email via EmailJS to g2gauto@yahoo.com
             emailjs.send(
                 'SERVICE_ID_HERE',      // Replace with your EmailJS Service ID
                 'TEMPLATE_ID_HERE',     // Replace with your EmailJS Template ID
-                formData
+                {
+                    to_email: 'g2gauto@yahoo.com',
+                    from_name: formData.from_name,
+                    from_phone: formData.from_phone,
+                    from_email: formData.from_email,
+                    message: formData.message
+                }
             ).then(
                 function(response) {
-                    console.log('Email sent successfully:', response);
-                    alert('Thank you! We will contact you within 24 hours.');
+                    console.log('Email sent successfully to g2gauto@yahoo.com:', response);
+                    alert('Thank you! Your estimate request has been sent to our team. We will contact you within 24 hours.');
                     form.reset();
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalBtnText;
                 },
                 function(error) {
                     console.error('Email send failed:', error);
-                    alert('Failed to send message. Please try again or call us directly at (903) 253-XXXX');
+                    alert('Failed to send message. Please try again or call us directly at (903) 253-0511');
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalBtnText;
                 }
-            );   console.log('Form submitted:', { name, phone, email, message });
-                alert('Thank you! We will contact you within 24 hours.');
-                form.reset();
-            }
+            );
         }
     </script>
 </body>
