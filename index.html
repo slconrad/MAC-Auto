@@ -193,6 +193,19 @@
             display: flex;
             transition: transform 0.5s ease-in-out;
             gap: 20px;
+            animation: autoScroll 20s infinite linear;
+        }
+        
+        @keyframes autoScroll {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(0); }
+            25% { transform: translateX(-170px); }
+            45% { transform: translateX(-170px); }
+            50% { transform: translateX(-340px); }
+            70% { transform: translateX(-340px); }
+            75% { transform: translateX(-510px); }
+            95% { transform: translateX(-510px); }
+            100% { transform: translateX(0); }
         }
         .dealership-card {
             flex: 0 0 150px;
@@ -485,10 +498,10 @@
             <p style="margin-bottom: 30px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Proudly Trusted By Dealerships</p>
             
             <div class="dealership-slider">
-                <!-- <div class="slider-controls"> -->
+                <div class="slider-controls">
                     <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
                     <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
-                <!-- </div> -->
+                </div>
                 
                 <div class="slider-container" id="sliderContainer">
                     <div class="dealership-card active">
@@ -756,33 +769,15 @@
         document.querySelectorAll('.accordion-header').forEach(header => {
             header.addEventListener('click', () => {
                 const body = header.nextElementSibling;
-                const icon = header.querySelector('i');
-                
-                // Toggle active class logic
-                if (body.style.maxHeight) {
-                    body.style.maxHeight = null;
-                    icon.style.transform = "rotate(0deg)";
-                } else {
-                    body.style.maxHeight = body.scrollHeight + "px";
-                    icon.style.transform = "rotate(180deg)";
-                }
-            });
-        });
-
-        // Dealership Slider Functionality - FIXED VERSION
-        let currentIndex = 0;
-        let autoSlideInterval = null;
-        
-        const sliderContainer = document.getElementById('sliderContainer');
-        const cards = document.querySelectorAll('.dealership-card');
+                const icon = header.querySeleCSS ANIMATION BASED
         const indicatorsContainer = document.getElementById('indicators');
+        const cards = document.querySelectorAll('.dealership-card');
+        const totalCards = cards.length;
+        const sliderContainer = document.getElementById('sliderContainer');
         const prevBtn = document.querySelector('.prev-btn');
         const nextBtn = document.querySelector('.next-btn');
         
-        const cardWidth = 170; // 150px card + 20px gap
-        const totalCards = cards.length;
-        
-        console.log('Slider initialized with', totalCards, 'cards');
+        console.log('Slider initialized with', totalCards, 'cards - CSS Animation based');
         
         // Create indicators
         function createIndicators() {
@@ -790,67 +785,58 @@
             for (let i = 0; i < totalCards; i++) {
                 const indicator = document.createElement('div');
                 indicator.className = 'indicator' + (i === 0 ? ' active' : '');
-                indicator.addEventListener('click', () => {
-                    goToSlide(i);
-                    resetAutoSlide();
-                });
                 indicatorsContainer.appendChild(indicator);
             }
         }
         
-        function updateSlider() {
-            // Move the slider container
-            const offset = -currentIndex * cardWidth;
-            console.log('Moving to index', currentIndex, 'offset:', offset + 'px');
-            sliderContainer.style.transform = `translateX(${offset}px)`;
-            
-            // Update active card
-            cards.forEach((card, index) => {
-                card.classList.toggle('active', index === currentIndex);
-            });
-            
-            // Update active indicator
-            const indicators = document.querySelectorAll('.indicator');
-            indicators.forEach((ind, index) => {
-                ind.classList.toggle('active', index === currentIndex);
-            });
+        // Pause animation on hover/button click
+        let currentIndex = 0;
+        
+        function pauseAnimation() {
+            sliderContainer.style.animationPlayState = 'paused';
+        }
+        
+        function resumeAnimation() {
+            sliderContainer.style.animationPlayState = 'running';
         }
         
         function nextSlide() {
+            pauseAnimation();
             currentIndex = (currentIndex + 1) % totalCards;
-            console.log('Next slide: currentIndex =', currentIndex);
-            updateSlider();
+            const offset = -currentIndex * 170;
+            sliderContainer.style.animation = 'none';
+            sliderContainer.style.transform = `translateX(${offset}px)`;
+            
+            // Update indicators
+            document.querySelectorAll('.indicator').forEach((ind, idx) => {
+                ind.classList.toggle('active', idx === currentIndex);
+            });
+            
+            console.log('Next slide:', currentIndex);
         }
         
         function prevSlide() {
+            pauseAnimation();
             currentIndex = (currentIndex - 1 + totalCards) % totalCards;
-            console.log('Prev slide: currentIndex =', currentIndex);
-            updateSlider();
-        }
-        
-        function goToSlide(index) {
-            currentIndex = index % totalCards;
-            console.log('Go to slide:', currentIndex);
-            updateSlider();
-        }
-        
-        function resetAutoSlide() {
-            // Clear existing interval
-            if (autoSlideInterval) {
-                clearInterval(autoSlideInterval);
-            }
-            // Restart auto-slide after 5 seconds
-            autoSlideInterval = setInterval(nextSlide, 5000);
-        }
-        
-        // Event listeners
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                prevSlide();
-                resetAutoSlide();
+            const offset = -currentIndex * 170;
+            sliderContainer.style.animation = 'none';
+            sliderContainer.style.transform = `translateX(${offset}px)`;
+            
+            // Update indicators
+            document.querySelectorAll('.indicator').forEach((ind, idx) => {
+                ind.classList.toggle('active', idx === currentIndex);
             });
+            
+            console.log('Prev slide:', currentIndex);
         }
-        if (nextBtn) {
+        
+        // Add event listeners
+        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+        
+        // Initialize indicators
+        createIndicators();
+        console.log('CSS Animation carousel is running
             nextBtn.addEventListener('click', () => {
                 nextSlide();
                 resetAutoSlide();
