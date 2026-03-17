@@ -402,7 +402,7 @@
             background: white;
             box-shadow: 0 4px 20px rgba(0,0,0,0.03);
         }
-        .stars { color: #F59E0B; margin-bottom: 15px; }
+        .checkmark { color: #F59E0B; margin-bottom: 15px; font-size: 22px; }
         .tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: #6B7280; border: 1px solid #E5E7EB; padding: 4px 8px; border-radius: 4px; float: right; }
         .testi-text { font-style: italic; color: #374151; margin-bottom: 20px; display: block; }
         .author { display: flex; align-items: center; gap: 10px; }
