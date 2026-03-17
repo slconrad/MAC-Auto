@@ -134,7 +134,7 @@
         .hero {
             padding: 100px 0 60px;
             text-align: center;
-            text-shadow: 2px 1px 3px rgb(222, 220, 220);
+            background: radial-gradient(circle at center, #fff, #e1e1e1);
         }
         .hero h1 {
             font-size: 3.5rem;
@@ -143,6 +143,7 @@
             margin-bottom: 20px;
             color: var(--text-dark);
             margin-top: 18px;
+            text-shadow: 2px 1px 3px rgb(222, 220, 220);
         }
         .hero h1 span { color: var(--primary-red); text-decoration: underline; text-decoration-thickness: 4px; text-underline-offset: 6px; }
         .hero p {
@@ -162,7 +163,7 @@
         }
         .avatars { display: flex; }
         .avatars span {
-            width: 30px; height: 30px; background: #ddd; border-radius: 50%; border: 2px solid white; margin-left: -10px;
+            width: 30px; height: 30px; background: rgb(250, 169, 169); border-radius: 50%; border: 2px solid white; margin-left: -10px;
         }
         .avatars span:first-child { margin-left: 0; background: #EF4444; }
 
@@ -399,7 +400,7 @@
             border: 1px solid #eee;
             padding: 30px;
             border-radius: 12px;
-            background: white;
+            background: rgb(255, 254, 251);
             box-shadow: 0 4px 20px rgba(0,0,0,0.03);
         }
         .checkmark { color: #F59E0B; margin-bottom: 15px; font-size: 22px; }
