@@ -304,27 +304,8 @@
         <div class="conversion-split">
             <div class="form-side" id="contact">
                 <h3 style="margin-bottom: 20px; font-size: 1.5rem;"><i class="fas fa-paper-plane" style="color: var(--primary-red);"></i> Get Your Free Estimate</h3>
-                <p style="margin-bottom: 30px; font-size: 0.9rem; color: #666;">Fill out the form and we'll contact you within 24 hours with your personalized estimate.</p>
-                <form id="estimateForm" onsubmit="handleFormSubmit(event)">
-                    <div class="form-group">
-                        <label>Name *</label>
-                        <input type="text" name="from_name" class="form-control" placeholder="Your full name" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Phone *</label>
-                        <input type="tel" name="from_phone" class="form-control" placeholder="(903) 253-XXXX" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email *</label>
-                        <input type="email" name="from_email" class="form-control" placeholder="your.email@example.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label>How can we help? *</label>
-                        <textarea name="message" class="form-control" rows="3" placeholder="Tell us about your auto paint or body repair needs" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-red" style="width: 100%;">Get My Free Estimate <i class="fas fa-arrow-right"></i></button>
-                    <p style="font-size: 0.7rem; color: #999; margin-top: 15px;">By submitting this form, you agree to our Privacy Policy and Terms of Service.</p>
-                </form>
+                <iframe data-tally-src="https://tally.so/embed/jax09E?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="200" frameborder="0" marginheight="0" marginwidth="0" title="Get Your Free Estimate"></iframe>
+                <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
             </div>
 
             <div class="red-side">
@@ -388,8 +369,6 @@
         });
     </script>
     <script>
-        // Initialize EmailJS
-        emailjs.init('YOUR_PUBLIC_KEY_HERE'); // Get your public key from https://dashboard.emailjs.com/
 
         // Dealership Slider Functionality - CSS ANIMATION BASED
         const indicatorsContainer = document.getElementById('indicators');
@@ -463,60 +442,7 @@
         // Auto-rotate slider every 5 seconds
         autoSlideInterval = setInterval(nextSlide, 5000);
         console.log('Auto-slide started');
-        
-        // Form submission handler
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            const form = event.target;
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const originalBtnText = submitBtn.innerHTML;
-            
-            // Get form values
-            const formData = {
-                from_name: form.querySelector('input[name="from_name"]').value,
-                from_phone: form.querySelector('input[name="from_phone"]').value,
-                from_email: form.querySelector('input[name="from_email"]').value,
-                message: form.querySelector('textarea[name="message"]').value,
-                to_email: 'g2gauto@yahoo.com'
-            };
-            
-            // Validate all fields
-            if (!formData.from_name || !formData.from_phone || !formData.from_email || !formData.message) {
-                alert('Please fill in all fields.');
-                return;
-            }
-            
-            // Show loading state
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            
-            // Send email via EmailJS to g2gauto@yahoo.com
-            emailjs.send(
-                'SERVICE_ID_HERE',      // Replace with your EmailJS Service ID
-                'TEMPLATE_ID_HERE',     // Replace with your EmailJS Template ID
-                {
-                    to_email: 'g2gauto@yahoo.com',
-                    from_name: formData.from_name,
-                    from_phone: formData.from_phone,
-                    from_email: formData.from_email,
-                    message: formData.message
-                }
-            ).then(
-                function(response) {
-                    console.log('Email sent successfully to g2gauto@yahoo.com:', response);
-                    alert('Thank you! Your estimate request has been sent to our team. We will contact you within 24 hours.');
-                    form.reset();
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalBtnText;
-                },
-                function(error) {
-                    console.error('Email send failed:', error);
-                    alert('Failed to send message. Please try again or call us directly at (903) 253-0511');
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalBtnText;
-                }
-            );
-        }
+    
     </script>
 </body>
 </html>
