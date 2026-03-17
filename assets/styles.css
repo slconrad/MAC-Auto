@@ -104,7 +104,9 @@
             font-weight: 900;
             color: var(--dark-slate);
             font-style: italic;
+            text-decoration: none;
         }
+        .logo:hover { color: var(--dark-slate); }
         .logo span { color: var(--primary-red); }
         
         .nav-links { display: flex; gap: 30px; }

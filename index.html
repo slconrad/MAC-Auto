@@ -29,7 +29,7 @@
 
     <header>
         <div class="container nav-wrapper">
-            <div class="logo">MAC <span>AUTO & PAINT</span></div>
+            <a href="#" class="logo">MAC <span>AUTO & PAINT</span></a>
             <nav class="nav-links" id="navLinks">
                 <a href="#services">Services</a>
                 <a href="#areas">Areas Served</a>
@@ -216,34 +216,33 @@
             <div class="testi-grid">
                 <div class="testi-card">
                     <div class="stars">★★★★★ <span class="tag">Recent Review</span></div>
-                    <p class="testi-text">"I highly recommend Mac Auto Body! They're dependable, honest, and deliver great quality work. The detail really shows in the finished product."</p>
+                    <p class="testi-text">"G2G did a fantastic job on my car. The front end was pelted by hundreds of 1” rocks going down the freeway. They repaired it all, hood, fenders and all bc across the front. It looks perfect! It matches the rest of the car perfectly.
+Communication with the shop (Casey) in particular, was plentiful and timely. He kept me up to speed, even when there were changes to the timing.
+I would recommend G2G Paint to anyone needing body work on their vehicle."</p>
                     <div class="author">
                         <div class="author-avatar">KB</div>
                         <div class="author-info">
-                            <h5>Kelly Brady</h5>
-                            <span>Local Guide, 12 reviews</span>
+                            <h5>David Miles</h5>
                         </div>
                     </div>
                 </div>
                 <div class="testi-card">
                     <div class="stars">★★★★★ <span class="tag">Quick Service</span></div>
-                    <p class="testi-text">"Great service, great personality, great price, and quick to serve!! They painted our hood and front fender and was ready in a few days!!"</p>
+                    <p class="testi-text">"I highly recommend G2G auto body shop! They’re dependable, honest, and deliver great quality work. The prices are fair and reasonable, and the attention to detail really shows in the finished product. My car looks AMAZING! It’s hard to find a shop you can truly trust, but this one goes above and beyond. I’ll definitely be coming back if I ever need work done again!"</p>
                     <div class="author">
                         <div class="author-avatar">SM</div>
                         <div class="author-info">
-                            <h5>Susanne McGee</h5>
-                            <span>Local Guide, 99 reviews</span>
+                            <h5>Kelly Brady</h5>
                         </div>
                     </div>
                 </div>
                 <div class="testi-card">
-                    <div class="stars">★★★★★ <span class="tag">Collision Repair</span></div>
-                    <p class="testi-text">"Had paint scratched from a minor collision. Dusty and the crew were great to work with and exceeded expectations."</p>
+                    <div class="stars">★★★★★ <span class="tag">Paint/Repair</span></div>
+                    <p class="testi-text">"Great service, great personality, great price, and quick to serve!! They painted our hood and front fender and was ready in a few days!!"</p>
                     <div class="author">
                         <div class="author-avatar">RO</div>
                         <div class="author-info">
-                            <h5>Ryan O</h5>
-                            <span>Customer, Tyler TX</span>
+                            <h5>Susan McGee</h5>
                         </div>
                     </div>
                 </div>
@@ -340,11 +339,18 @@
     <script>
         function toggleCard(btn) {
             const card = btn.closest('.service-card');
-            const isExpanded = card.classList.toggle('expanded');
-            if (isExpanded) {
+            const isExpanded = card.classList.contains('expanded');
+
+            // Collapse all cards first
+            document.querySelectorAll('.service-card.expanded').forEach(openCard => {
+                openCard.classList.remove('expanded');
+                openCard.querySelector('.service-btn').innerHTML = 'Learn More <i class="fas fa-arrow-right"></i>';
+            });
+
+            // If this card wasn't already open, expand it
+            if (!isExpanded) {
+                card.classList.add('expanded');
                 btn.innerHTML = 'Show Less <i class="fas fa-arrow-up"></i>';
-            } else {
-                btn.innerHTML = 'Learn More <i class="fas fa-arrow-right"></i>';
             }
         }
 
