@@ -134,7 +134,7 @@
         .hero {
             padding: 100px 0 60px;
             text-align: center;
-            background: radial-gradient(circle at center, #fff 0%, #f3f4f6 100%);
+            text-shadow: 2px 1px 3px rgb(222, 220, 220);
         }
         .hero h1 {
             font-size: 3.5rem;
