@@ -350,10 +350,10 @@
             transition: min-height 0.4s ease;
         }
         /* Using gradients to simulate images for reliability */
-        .sc-1 { background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1512080482556-ea648017576c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'); background-size: cover; }
-        .sc-2 { background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1762049297259-f9fdd460ec99?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'); background-size: cover; }
-        .sc-3 { background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'); background-size: cover; }
-        .sc-4 { background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1494905998402-395d579af36f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'); background-size: cover; }
+        .sc-1 { background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1512080482556-ea648017576c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'); background-size: cover; border-top: 2px solid #EF4444; padding: 30px; border-radius: 12px;}
+        .sc-2 { background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1762049297259-f9fdd460ec99?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'); background-size: cover; border-top: 2px solid #EF4444; padding: 30px; border-radius: 12px;}
+        .sc-3 { background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'); background-size: cover; border-top: 2px solid #EF4444; padding: 30px; border-radius: 12px;}
+        .sc-4 { background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1494905998402-395d579af36f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'); background-size: cover; border-top: 2px solid #EF4444; padding: 30px; border-radius: 12px;}
         
         .service-card h3 { font-size: 1.8rem; margin-bottom: 10px; }
         .service-card p { opacity: 0.9; margin-bottom: 20px; font-size: 0.95rem; }
@@ -398,6 +398,7 @@
         }
         .testi-card {
             border: 1px solid #eee;
+            border-top: 2px solid #EF4444;
             padding: 30px;
             border-radius: 12px;
             background: rgb(255, 254, 251);
@@ -426,6 +427,7 @@
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 2px solid #EF4444; padding: 30px; border-radius: 12px;
         }
         .faq-card:hover {
             transform: translateY(-4px);
