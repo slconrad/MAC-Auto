@@ -388,7 +388,12 @@
             line-height: 1.6;
             margin-bottom: 4px;
         }
-
+        /* --- BLOG CARDS --- */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: 30px;
+        }
         /* --- TESTIMONIALS --- */
         .testimonials { background: white; }
         .testi-grid {
